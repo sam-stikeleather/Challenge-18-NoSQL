@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const reactionSchema = require('./reaction');
 
-const thoughtSchema = new mongoose.Schema(
+const reactionSchema = new mongoose.Schema(
   {
     thoughtText: {
       type: String,
@@ -28,16 +27,5 @@ const thoughtSchema = new mongoose.Schema(
   }
 );
 
-thoughtSchema.virtual('reactionCount').get(function () {
-  return this.reactions.length;
-});
 
-// Add a console log to indicate that the schema is being defined
-console.log('Defining Thought schema');
-
-const Thought = mongoose.model('Thought', thoughtSchema);
-
-// Add a console log to indicate that the model is being created
-console.log('Creating Thought model');
-
-module.exports = Thought;
+module.exports = reactionSchema;

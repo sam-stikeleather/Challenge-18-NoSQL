@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
-const reactionSchema = require('./reaction');
+const { Schema } = mongoose;
 
-console.log('Importing Reaction schema');
+// Remove this line that causes the circular dependency
+// const reactionSchema = require('./reaction');
 
-const thoughtSchema = new mongoose.Schema(
+const thoughtSchema = new Schema(
   {
     thoughtText: {
       type: String,
@@ -19,7 +20,16 @@ const thoughtSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    reactions: [reactionSchema],
+    // You can define the reactions array schema directly here
+    reactions: [
+      {
+        emoji: {
+          type: String,
+          required: true,
+        },
+        // ... other fields ...
+      },
+    ],
   },
   {
     toJSON: {
@@ -34,10 +44,6 @@ thoughtSchema.virtual('reactionCount').get(function () {
   return this.reactions.length;
 });
 
-console.log('Defining Thought schema');
-
 const Thought = mongoose.model('Thought', thoughtSchema);
-
-console.log('Creating Thought model');
 
 module.exports = Thought;
