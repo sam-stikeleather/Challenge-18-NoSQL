@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-// Remove this line that causes the circular dependency
-// const reactionSchema = require('./reaction');
+const reactionSchema = require('./reaction');
 
 const thoughtSchema = new Schema(
   {

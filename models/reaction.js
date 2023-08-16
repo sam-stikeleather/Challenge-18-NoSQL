@@ -2,21 +2,20 @@ const mongoose = require('mongoose');
 
 const reactionSchema = new mongoose.Schema(
   {
-    thoughtText: {
+    reactionBody: {
       type: String,
       required: true,
       minlength: 1,
       maxlength: 280,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
     username: {
       type: String,
       required: true,
     },
-    reactions: [reactionSchema],
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
   },
   {
     toJSON: {
@@ -26,12 +25,5 @@ const reactionSchema = new mongoose.Schema(
     id: false,
   }
 );
-
-// ReactionCount virtural
-thoughtSchema.virtual('reactionCount').get(function () {
-  return this.reactions.length;
-});
-//Thought model 
-const Thought = mongoose.model('Thought', thoughtSchema);
 
 module.exports = reactionSchema;
