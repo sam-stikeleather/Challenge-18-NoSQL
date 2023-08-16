@@ -20,16 +20,7 @@ const thoughtSchema = new Schema(
       type: String,
       required: true,
     },
-    // You can define the reactions array schema directly here
-    reactions: [
-      {
-        emoji: {
-          type: String,
-          required: true,
-        },
-        // ... other fields ...
-      },
-    ],
+    reactions: [reactionSchema], 
   },
   {
     toJSON: {
