@@ -106,7 +106,7 @@ async deleteThought(req, res) {
   // POST to create a reaction stored in a single thought's reactions array field
   async createReaction(req, res) {
     const { thoughtId } = req.params;
-    const { reactionText, username } = req.body;
+    const { reactionBody, username } = req.body;
 
     try {
       const thought = await Thought.findById(thoughtId);
@@ -116,7 +116,7 @@ async deleteThought(req, res) {
       }
 
       const newReaction = {
-        reactionText,
+        reactionBody,
         username,
       };
 
