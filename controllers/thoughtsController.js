@@ -27,7 +27,7 @@ const thoughtsController = {
 
   // POST to create a new thought
   async createThought(req, res) {
-    const { thoughtText, username, userId } = req.body;
+    const { thoughtText, username} = req.body;
   
     try {
       const newThought = new Thought({
@@ -38,7 +38,7 @@ const thoughtsController = {
       const savedThought = await newThought.save();
   
       // Push the created thought's _id to the associated user's thoughts array field
-      const user = await User.findById(userId);
+      const user = await User.findOne({ username: username });
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
